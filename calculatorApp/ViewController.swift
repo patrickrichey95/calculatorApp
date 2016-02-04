@@ -2,8 +2,10 @@
 //  ViewController.swift
 //  calculatorApp
 //
-//  Created by student on 2016-02-02.
-//  Copyright © 2016 student. All rights reserved.
+//  This is a simple calculator app that allows the user to perform simple calculations
+//
+//  Created by Patrick Richey on 2016-02-02.
+//  Copyright © 2016 Patrick Richey. All rights reserved.
 //
 
 import UIKit
