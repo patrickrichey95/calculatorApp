@@ -22,12 +22,15 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //instantiate variables for calculations
     @IBOutlet weak var screen: UILabel!
     var firstNumber = Float()
     var secondNumber = Float()
     var result = Float()
     var operation = ""
     var isTypingNumber = false
+    var decimalCount = 0
+    var operatorCount = 0
 
     @IBAction func numberClicked(sender: AnyObject) {
         let number = sender.currentTitle
@@ -36,22 +39,29 @@ class ViewController: UIViewController {
             screen.text = screen.text! + number!!
         } else {
             screen.text = number
+            decimalCount = 0
         }
         isTypingNumber = true
     }
-
+    
+    //add decimal to current number
     @IBAction func decimalClicked(sender: AnyObject) {
         let decimal = sender.currentTitle
         
-        screen.text = screen.text! + decimal!!
+        if isTypingNumber == true && decimalCount == 0 {
+            screen.text = screen.text! + decimal!!
+            decimalCount = 1
+        }
     }
     
+    //assign the operator on click
     @IBAction func operatorClicked(sender: AnyObject) {
         operation = sender.currentTitle!!
         isTypingNumber = false
         firstNumber = (screen.text! as NSString).floatValue
     }
     
+    //perform calculation
     @IBAction func evaluate(sender: AnyObject) {
         secondNumber = (screen.text! as NSString).floatValue
         isTypingNumber = false
@@ -67,6 +77,7 @@ class ViewController: UIViewController {
         screen.text = "\(result)"
     }
     
+    //clear the screen and reset numbers
     @IBAction func clearView(sender: AnyObject) {
         firstNumber = 0
         secondNumber = 0
