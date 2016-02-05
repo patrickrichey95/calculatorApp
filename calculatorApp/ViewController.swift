@@ -54,11 +54,19 @@ class ViewController: UIViewController {
         }
     }
     
-    //assign the operator on click
+    //assign the operator on click (working on multiple operator clicks)
     @IBAction func operatorClicked(sender: AnyObject) {
         operation = sender.currentTitle!!
         isTypingNumber = false
-        firstNumber = (screen.text! as NSString).floatValue
+        if operatorCount == 0 {
+            firstNumber = (screen.text! as NSString).floatValue
+        }
+        else if operatorCount == 1 {
+            evaluate(operation)
+            firstNumber = result
+            result = 0
+        }
+        operatorCount = 1
     }
     
     //perform calculation
