@@ -32,9 +32,10 @@ class ViewController: UIViewController {
     var decimalCount = 0
     var operatorCount = 0
 
+    //capture event when a number button is clicked
     @IBAction func numberClicked(sender: AnyObject) {
         let number = sender.currentTitle
-        
+        //while use is still entering numbers, concat to existing number
         if isTypingNumber == true {
             screen.text = screen.text! + number!!
         } else {
@@ -47,32 +48,28 @@ class ViewController: UIViewController {
     //add decimal to current number
     @IBAction func decimalClicked(sender: AnyObject) {
         let decimal = sender.currentTitle
-        
+        //if user is typing a number and hasn't yet entered a decimal point
         if isTypingNumber == true && decimalCount == 0 {
             screen.text = screen.text! + decimal!!
-            decimalCount = 1
+            decimalCount = 1 //to limit allowed decimals per number
         }
     }
     
     //assign the operator on click (working on multiple operator clicks)
     @IBAction func operatorClicked(sender: AnyObject) {
-        operation = sender.currentTitle!!
-        isTypingNumber = false
         if operatorCount == 0 {
             firstNumber = (screen.text! as NSString).floatValue
+            operation = sender.currentTitle!!
+            isTypingNumber = false
         }
-        else if operatorCount == 1 {
-            evaluate(operation)
-            firstNumber = result
-            result = 0
-        }
-        operatorCount = 1
+        operatorCount++
     }
     
     //perform calculation
     @IBAction func evaluate(sender: AnyObject) {
         secondNumber = (screen.text! as NSString).floatValue
         isTypingNumber = false
+        //perform any chosen operation
         if operation == "+" {
             result = firstNumber + secondNumber
         } else if operation == "-" {
@@ -82,7 +79,9 @@ class ViewController: UIViewController {
         } else if operation == "÷" {
             result = firstNumber / secondNumber
         }
+        //display the result to the screen
         screen.text = "\(result)"
+        operatorCount = 0
     }
     
     //clear the screen and reset numbers
